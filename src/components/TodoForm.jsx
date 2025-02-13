@@ -5,7 +5,7 @@ function TodoForm({ addTodo }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (text.trim() === "") return;
+    if (!text.trim()) return;
     addTodo(text);
     setText("");
   };
@@ -14,7 +14,7 @@ function TodoForm({ addTodo }) {
     <form onSubmit={handleSubmit}>
       <input
         type="text"
-        placeholder="Add a new todo"
+        placeholder="Add a new todo..."
         value={text}
         onChange={(e) => setText(e.target.value)}
       />

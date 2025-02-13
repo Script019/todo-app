@@ -7,14 +7,16 @@ function App() {
   const [todos, setTodos] = useState([
     { id: 1, text: "Learn React", isCompleted: false },
     { id: 2, text: "Build a Todo App", isCompleted: false },
-    { id: 3, text: "Master State Management", isCompleted: false }
   ]);
 
+  // Function to add a new todo
   const addTodo = (text) => {
-    setTodos([...todos, { id: Date.now(), text, isCompleted: false }]);
+    const newTodo = { id: Date.now(), text, isCompleted: false };
+    setTodos([...todos, newTodo]);
   };
 
-  const toggleComplete = (id) => {
+  // Function to toggle completion
+  const toggleTodo = (id) => {
     setTodos(
       todos.map((todo) =>
         todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo
@@ -22,6 +24,16 @@ function App() {
     );
   };
 
+  // Function to edit a todo
+  const editTodo = (id, newText) => {
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, text: newText } : todo
+      )
+    );
+  };
+
+  // Function to delete a todo
   const deleteTodo = (id) => {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
@@ -30,7 +42,12 @@ function App() {
     <div className="app">
       <h1>Todo App</h1>
       <TodoForm addTodo={addTodo} />
-      <TodoList todos={todos} toggleComplete={toggleComplete} deleteTodo={deleteTodo} />
+      <TodoList
+        todos={todos}
+        toggleTodo={toggleTodo}
+        editTodo={editTodo}
+        deleteTodo={deleteTodo}
+      />
     </div>
   );
 }
